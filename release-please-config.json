@@ -1,5 +1,6 @@
 {
   "release-type": "node",
+  "plugins": ["node-workspace"],
   "packages": {
     "apps/docs": {
       "package-name": "@0xdbe/docs",

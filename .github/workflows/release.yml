@@ -23,7 +23,7 @@ jobs:
         include-component-in-tag: true
     - name: clone repository
       uses: actions/checkout@v4
-      if: ${{ steps.release.outputs.release_created }}
+      if: ${{ steps.release.outputs.releases_created }}
     - name: configure npm
       uses: actions/setup-node@v4
       with:
@@ -31,18 +31,4 @@ jobs:
         registry-url: 'https://npm.pkg.github.com'
         scope: '@0xdbe'
         always-auth: true
-      if: ${{ steps.release.outputs.release_created }}
-
-    - name: install dependencies
-      run: npm ci
-      if: ${{ steps.release.outputs.release_created }}
-
-    - name: build
-      run: npm run build
-      if: ${{ steps.release.outputs.release_created }}
-
-    - name: publish package
-      run: npm publish
-      env:
-        NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      if: ${{ steps.release.outputs.release_created }}
+      if: ${{ steps.release.outputs.releases_created }}

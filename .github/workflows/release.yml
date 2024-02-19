@@ -25,7 +25,7 @@ jobs:
       run: echo ${{ steps.release.outputs.paths_released }}
     - name: clone repository
       uses: actions/checkout@v4
-      if: ${{ steps.release.outputs.releases_created }}
+      if: ${{ steps.release.outputs.releases_created == 'true' }}
     - name: configure npm
       uses: actions/setup-node@v4
       with:
@@ -33,13 +33,13 @@ jobs:
         registry-url: 'https://npm.pkg.github.com'
         scope: '@0xdbe'
         always-auth: true
-      if: ${{ steps.release.outputs.releases_created }}
+      if: ${{ steps.release.outputs.releases_created == 'true' }}
     - name: install yarn
       run: npm install -g yarn
-      if: ${{ steps.release.outputs.releases_created }}
+      if: ${{ steps.release.outputs.releases_created == 'true' }}
     - name: Build UI
       run: yarn build
       working-directory: packages/ui
-      if: ${{ steps.release.outputs['packages/ui--release_created'] }} 
+      if: ${{ steps.release.outputs['packages/ui--release_created'] == 'true' }} 
 
       

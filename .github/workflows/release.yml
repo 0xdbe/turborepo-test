@@ -40,4 +40,6 @@ jobs:
     - name: Build UI
       run: yarn build
       working-directory: packages/ui
-      if: ${{ steps.release.outputs.packages-ui--release_created }} 
+      if: ${{ steps.release.outputs['packages/ui--release_created'] }} 
+
+      

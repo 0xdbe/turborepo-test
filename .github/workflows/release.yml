@@ -31,10 +31,10 @@ jobs:
         registry-url: 'https://npm.pkg.github.com'
         scope: '@0xdbe'
         always-auth: true
-      if: ${{ steps.release.outputs.releases_created }}
+      if: ${{ steps.release.outputs.releses_created }}
     - name: install yarn
       run: npm install -g yarn
-      if: ${{ steps.release.outputs.releases_created }}
+      if: ${{ steps.release.outputs.releses_created }}
     - name: Build UI
       run: yarn build
       working-directory: packages/ui

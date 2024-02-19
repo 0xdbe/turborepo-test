@@ -43,8 +43,8 @@ jobs:
     - name: Build
       run: yarn build
       if: ${{ steps.release.outputs.releases_created == 'true' }}
-    - name: Publish 'docs' apps
-      run: yarn workspace docs publish
+    - name: Publish '@0xdbe/docs' apps
+      run: yarn workspace @0xdbe/docs publish
       if: ${{ steps.release.outputs['apps/docs--release_created'] == 'true' }}
     - name: Publish 'web' apps
       run: yarn workspace web publish

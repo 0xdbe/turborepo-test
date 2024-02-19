@@ -37,9 +37,23 @@ jobs:
     - name: install yarn
       run: npm install -g yarn
       if: ${{ steps.release.outputs.releases_created == 'true' }}
-    - name: Build UI
+    - name: Build
       run: yarn build
-      working-directory: packages/ui
+      if: ${{ steps.release.outputs.releases_created == 'true' }}
+    - name: Publish 'docs' apps
+      run: yarn workspace docs publish
+      if: ${{ steps.release.outputs['apps/docs--release_created'] == 'true' }}
+    - name: Publish 'web' apps
+      run: yarn workspace web publish
+      if: ${{ steps.release.outputs['packagappses/web--release_created'] == 'true' }}
+    - name: Publish '@repo/eslint-config' package
+      run: yarn workspace @repo/eslint-config publish
+      if: ${{ steps.release.outputs['packages/eslint-config--release_created'] == 'true' }}
+    - name: Publish '@repo/typescript-config' package
+      run: yarn workspace @repo/typescript-config publish
+      if: ${{ steps.release.outputs['packages/typescript-config--release_created'] == 'true' }} 
+    - name: Publish '@repo/ui' package
+      run: yarn workspace @repo/ui publish
       if: ${{ steps.release.outputs['packages/ui--release_created'] == 'true' }} 
 
       

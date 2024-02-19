@@ -32,3 +32,10 @@ jobs:
         scope: '@0xdbe'
         always-auth: true
       if: ${{ steps.release.outputs.releases_created }}
+    - name: install yarn
+      run: npm install -g yarn
+      if: ${{ steps.release.outputs.releases_created }}
+    - name: Build UI
+      run: yarn build
+      working-directory: packages/ui
+      if: ${{ steps.release.outputs.packages-ui--release_created }} 

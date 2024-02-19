@@ -48,6 +48,12 @@
   * dependencies
     * @repo/ui bumped from 1.1.7 to 1.1.8
 
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @repo/ui bumped from 1.1.8 to 1.1.9
+
 ## [1.1.0](https://github.com/0xdbe/turborepo-test/compare/docs-v1.0.0...docs-v1.1.0) (2024-02-16)
 
 

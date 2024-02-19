@@ -12,6 +12,12 @@
   * dependencies
     * @repo/ui bumped from 1.1.1 to 1.1.2
 
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @repo/ui bumped from 1.1.3 to 1.1.4
+
 ## [1.2.0](https://github.com/0xdbe/turborepo-test/compare/web-v1.1.2...web-v1.2.0) (2024-02-19)
 
 

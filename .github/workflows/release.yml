@@ -37,7 +37,7 @@ jobs:
     - name: install yarn
       run: npm install -g yarn
       if: ${{ steps.release.outputs.releases_created == 'true' }}
-    - name: Build
+    - name: install dependencies
       run: yarn install
       if: ${{ steps.release.outputs.releases_created == 'true' }}
     - name: Build

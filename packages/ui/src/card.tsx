@@ -19,7 +19,7 @@ export function Card({
       <h2>
         {title} <span>-&gt;</span>
       </h2>
-      <p>Hello World 7</p>
+      <p>Hello World 8</p>
       <p>{children}</p>
     </a>
   );

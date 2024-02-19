@@ -1,6 +1,6 @@
 {
   "name": "@0xdbe/docs",
-  "version": "1.1.7",
+  "version": "1.1.8",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
   },
@@ -11,7 +11,7 @@
     "lint": "eslint . --max-warnings 0"
   },
   "dependencies": {
-    "@repo/ui": "1.1.7",
+    "@repo/ui": "1.1.8",
     "next": "^14.0.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"

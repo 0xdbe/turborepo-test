@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.10](https://github.com/0xdbe/turborepo-test/compare/ui-v1.1.9...ui-v1.1.10) (2024-02-20)
+
+
+### Bug Fixes
+
+* **ui:** update gretting message v11 ([adbdda4](https://github.com/0xdbe/turborepo-test/commit/adbdda44216cab6cb1dd3f271f238f5784e61e54))
+
 ## [1.1.9](https://github.com/0xdbe/turborepo-test/compare/ui-v1.1.8...ui-v1.1.9) (2024-02-19)
 
 

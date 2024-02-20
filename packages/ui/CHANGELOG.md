@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.12](https://github.com/0xdbe/turborepo-test/compare/ui-v1.1.11...ui-v1.1.12) (2024-02-20)
+
+
+### Bug Fixes
+
+* change scope ([ceea93a](https://github.com/0xdbe/turborepo-test/commit/ceea93af52626731033ea3aafa418c66b5f4adf7))
+
 ## [1.1.11](https://github.com/0xdbe/turborepo-test/compare/ui-v1.1.10...ui-v1.1.11) (2024-02-20)
 
 

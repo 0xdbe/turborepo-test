@@ -66,6 +66,20 @@
   * dependencies
     * @0xdbe/ui bumped from 1.1.10 to 1.1.11
 
+## [1.1.12](https://github.com/0xdbe/turborepo-test/compare/docs-v1.1.11...docs-v1.1.12) (2024-02-20)
+
+
+### Bug Fixes
+
+* change scope ([ceea93a](https://github.com/0xdbe/turborepo-test/commit/ceea93af52626731033ea3aafa418c66b5f4adf7))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @0xdbe/ui bumped from 1.1.11 to 1.1.12
+
 ## [1.1.0](https://github.com/0xdbe/turborepo-test/compare/docs-v1.0.0...docs-v1.1.0) (2024-02-16)
 
 

@@ -60,5 +60,3 @@ jobs:
     - name: Publish '@0xdbe/ui' package
       run: yarn workspace @0xdbe/ui publish
       if: ${{ steps.release.outputs['packages/ui--release_created'] == 'true' }} 
-
-      

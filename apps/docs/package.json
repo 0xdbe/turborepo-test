@@ -11,15 +11,15 @@
     "lint": "eslint . --max-warnings 0"
   },
   "dependencies": {
-    "@repo/ui": "1.1.10",
+    "@0xdbe/ui": "1.1.10",
     "next": "^14.0.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "^14.0.4",
-    "@repo/eslint-config": "1.1.0",
-    "@repo/typescript-config": "1.1.0",
+    "@0xdbe/eslint-config": "1.1.0",
+    "@0xdbe/typescript-config": "1.1.0",
     "@types/eslint": "^8.56.1",
     "@types/node": "^20.10.6",
     "@types/react": "^18.2.46",

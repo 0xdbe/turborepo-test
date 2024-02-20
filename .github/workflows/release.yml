@@ -48,17 +48,17 @@ jobs:
     - name: Publish '@0xdbe/docs' apps
       run: yarn workspace @0xdbe/docs publish
       if: ${{ steps.release.outputs['apps/docs--release_created'] == 'true' }}
-    - name: Publish 'web' apps
-      run: yarn workspace web publish
-      if: ${{ steps.release.outputs['packagappses/web--release_created'] == 'true' }}
-    - name: Publish '@repo/eslint-config' package
-      run: yarn workspace @repo/eslint-config publish
+    - name: Publish '@0xdbe/web' apps
+      run: yarn workspace @0xdbe/web publish
+      if: ${{ steps.release.outputs['apps/web--release_created'] == 'true' }}
+    - name: Publish '@0xdbe/eslint-config' package
+      run: yarn workspace @0xdbe/eslint-config publish
       if: ${{ steps.release.outputs['packages/eslint-config--release_created'] == 'true' }}
-    - name: Publish '@repo/typescript-config' package
-      run: yarn workspace @repo/typescript-config publish
+    - name: Publish '@0xdbe/typescript-config' package
+      run: yarn workspace @0xdbe/typescript-config publish
       if: ${{ steps.release.outputs['packages/typescript-config--release_created'] == 'true' }} 
-    - name: Publish '@repo/ui' package
-      run: yarn workspace @repo/ui publish
+    - name: Publish '@0xdbe/ui' package
+      run: yarn workspace @0xdbe/ui publish
       if: ${{ steps.release.outputs['packages/ui--release_created'] == 'true' }} 
 
       

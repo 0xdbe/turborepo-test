@@ -60,6 +60,12 @@
   * dependencies
     * @repo/ui bumped from 1.1.9 to 1.1.10
 
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @0xdbe/ui bumped from 1.1.10 to 1.1.11
+
 ## [1.1.0](https://github.com/0xdbe/turborepo-test/compare/docs-v1.0.0...docs-v1.1.0) (2024-02-16)
 
 

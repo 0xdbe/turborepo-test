@@ -72,6 +72,12 @@
   * dependencies
     * @0xdbe/ui bumped from 1.1.12 to 1.1.13
 
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @0xdbe/ui bumped from 1.1.13 to 1.1.14
+
 ## [1.1.12](https://github.com/0xdbe/turborepo-test/compare/docs-v1.1.11...docs-v1.1.12) (2024-02-20)
 
 

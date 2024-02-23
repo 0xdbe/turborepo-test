@@ -8,7 +8,8 @@
       "bump-minor-pre-major": false,
       "bump-patch-for-minor-pre-major": false,
       "draft": false,
-      "prerelease": false
+      "prerelease": true,
+      "prerelease-type": "beta"
     },
     "apps/web": {
       "package-name": "@0xdbe/web",
@@ -16,7 +17,8 @@
       "bump-minor-pre-major": false,
       "bump-patch-for-minor-pre-major": false,
       "draft": false,
-      "prerelease": false
+      "prerelease": true,
+      "prerelease-type": "beta"
     },
     "packages/eslint-config": {
       "package-name": "@0xdbe/eslint-config",
@@ -24,7 +26,8 @@
       "bump-minor-pre-major": false,
       "bump-patch-for-minor-pre-major": false,
       "draft": false,
-      "prerelease": false
+      "prerelease": true,
+      "prerelease-type": "beta"
     },
     "packages/typescript-config": {
       "package-name": "@0xdbe/typescript-config",
@@ -32,7 +35,8 @@
       "bump-minor-pre-major": false,
       "bump-patch-for-minor-pre-major": false,
       "draft": false,
-      "prerelease": false
+      "prerelease": true,
+      "prerelease-type": "beta"
     },
     "packages/ui": {
       "package-name": "@0xdbe/ui",

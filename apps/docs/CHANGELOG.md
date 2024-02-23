@@ -78,6 +78,13 @@
   * dependencies
     * @0xdbe/ui bumped from 1.1.13 to 1.1.14
 
+## [1.1.15](https://github.com/0xdbe/turborepo-test/compare/docs-v1.1.14...docs-v1.1.15) (2024-02-23)
+
+
+### Bug Fixes
+
+* **docs:** add grettings message ([ab7b208](https://github.com/0xdbe/turborepo-test/commit/ab7b20849fde3298a210ec3f55fa9696f4ef87a5))
+
 ## [1.1.12](https://github.com/0xdbe/turborepo-test/compare/docs-v1.1.11...docs-v1.1.12) (2024-02-20)
 
 

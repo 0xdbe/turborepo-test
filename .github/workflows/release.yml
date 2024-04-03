@@ -22,7 +22,7 @@ jobs:
       with:
         include-component-in-tag: true
 
-    - name: get branch name
+    - name: get release branch name
       id: get_branch_name
       if: ${{ steps.release.outputs.prs_created == 'true' }}
       run: |
@@ -30,39 +30,32 @@ jobs:
       env:
         PR_METADATA: ${{ steps.release.outputs.pr }}
 
-    - name: get git oid for the last commit
-      id: get_git_oid
+    - name: clone repo
+      uses: actions/checkout@v4
+      with:
+        ref: ${{ steps.get_branch_name.outputs.branchName }}
+
+    - name: edit file
       if: ${{ steps.release.outputs.prs_created == 'true' }}
       run: |
-        QUERY='query($repo: String!, $owner: String!, $branch: String!) {
-          repository(name: $repo, owner: $owner) {
-            ref(qualifiedName: $branch){
-              target {
-                ... on Commit {
-                  history(first: 1) {
-                    nodes {
-                      oid
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }'
-        RESULT=$(gh api graphql -F repo=$REPO -F owner=$OWNER -F branch=$BRANCH -f query="$QUERY")
-        OID=$(echo $RESULT | jq --raw-output '.data.repository.ref.target.history.nodes[].oid')
-        echo "oid=$OID" >> "$GITHUB_OUTPUT"
-      env:
-        GH_TOKEN: ${{ github.token }}
-        OWNER: "0xdbe"
-        REPO: "turborepo-test"
-        BRANCH: ${{ steps.get_branch_name.outputs.branchName }}
+        echo "hello" >> README.md
 
     - name: commit new file
       if: ${{ steps.release.outputs.prs_created == 'true' }}
       run: |
-        gh api graphql -F branchName=$BRANCH -F expectedHeadOid=$OID -f query='
-          mutation ($branchName: String!, $expectedHeadOid: GitObjectID!) { 
+        GIT_OID=$(git rev-parse HEAD)
+        FILE_CHANGES=$(git status --porcelain | awk 'match($1, "M"){pinrt $2}')
+        FILE_ADDITIONS=""
+        for FILE in $FILE_CHANGES; do
+          FILE_BASE64=$(base64 -w 0 $FILE)
+          FILE_ADDITIONS+="{path: \"$FILE\", contents: \"$FILE_BASE64\"},"
+        done
+        gh api graphql -F branchName=$BRANCH -F expectedHeadOid=$GIT_OID -F files=$FILE_ADDITIONS -f query='
+          mutation (
+              $branchName: String!, 
+              $expectedHeadOid: GitObjectID!
+              $files: [AdditionInput!]!
+            ) { 
             createCommitOnBranch(
               input: {
                 branch:
@@ -72,7 +65,7 @@ jobs:
                 },
                 message: {headline: "chore(test): commit message"},
                 fileChanges: {
-                  additions: {path: "hello.md", contents: "aGVsbG8="}
+                  additions: $files
                 }
                 expectedHeadOid: $expectedHeadOid
               }
@@ -85,7 +78,6 @@ jobs:
       env:
         GH_TOKEN: ${{ github.token }}
         BRANCH: ${{ steps.get_branch_name.outputs.branchName }}
-        OID: ${{ steps.get_git_oid.outputs.oid }}
 
     - name: print released packages
       run: echo ${{ steps.release.outputs.paths_released }}

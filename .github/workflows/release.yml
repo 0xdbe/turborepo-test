@@ -53,10 +53,13 @@ jobs:
           FILE_ADDITIONS+="{path: "readme.md", contents: "aGVsbG8="},"
         done
         echo "$FILE_ADDITIONS"
-        gh api graphql -F branchName=$BRANCH -F expectedHeadOid=$GIT_OID -f query='
+
+        $FILE_ADDITION = $(jq --null-input '{"path": "readme.md", "content": "aGVsbG8="}' )
+        gh api graphql -F branchName=$BRANCH -F expectedHeadOid=$GIT_OID -F file=$FILE_ADDITION -f query='
           mutation (
               $branchName: String!, 
               $expectedHeadOid: GitObjectID!
+              $file: FileAddition!
             ) { 
             createCommitOnBranch(
               input: {
@@ -67,7 +70,7 @@ jobs:
                 },
                 message: {headline: "chore(test): commit message"},
                 fileChanges: {
-                  additions: [$(echo $FILE_ADDITIONS)]
+                  additions: [$file]
                 }
                 expectedHeadOid: $expectedHeadOid
               }

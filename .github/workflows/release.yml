@@ -49,7 +49,8 @@ jobs:
         for FILE in $FILE_CHANGES; do
           FILE_BASE64=$(base64 -w 0 $FILE)
           echo "FILE: $FILE_BASE64 end"
-          FILE_ADDITIONS+="{path: \"$FILE\", contents: \"$FILE_BASE64\"},"
+          # FILE_ADDITIONS+="{path: \"$FILE\", contents: \"$FILE_BASE64\"},"
+          FILE_ADDITIONS+="{path: \"$FILE\", contents: "aGVsbG8="},"
         done
         echo "$FILE_ADDITIONS"
         gh api graphql -F branchName=$BRANCH -F expectedHeadOid=$GIT_OID -F files=["$FILE_ADDITIONS"] -f query='

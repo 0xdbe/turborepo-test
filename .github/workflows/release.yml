@@ -62,7 +62,7 @@ jobs:
       if: ${{ steps.release.outputs.prs_created == 'true' }}
       run: |
         gh api graphql -F branchName=$BRANCH -F expectedHeadOid=$OID -f query='
-          mutation { 
+          mutation ($branchName: String!, $expectedHeadOid: String!) { 
             createCommitOnBranch(
               input: {
                 branch:
@@ -76,7 +76,7 @@ jobs:
                 }
                 expectedHeadOid: $expectedHeadOid
               }
-            )
+            ){}
           }'
       env:
         GH_TOKEN: ${{ github.token }}

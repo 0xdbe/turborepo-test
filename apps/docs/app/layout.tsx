@@ -16,7 +16,7 @@ export default function RootLayout({
 }): JSX.Element {
   return (
     <html lang="en">
-      <p>hello qrrsssrrrrr</p>
+      <p>hello qrrssssrrrrr</p>
       <body className={inter.className}>{children}</body>
     </html>
   );

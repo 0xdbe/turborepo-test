@@ -48,6 +48,7 @@ jobs:
         FILE_ADDITIONS=""
         for FILE in $FILE_CHANGES; do
           FILE_BASE64=$(base64 -w 0 $FILE)
+          echo "FILE: $FILE_BASE64 end"
           FILE_ADDITIONS+="{path: \"$FILE\", contents: \"$FILE_BASE64\"},"
         done
         echo "$FILE_ADDITIONS"

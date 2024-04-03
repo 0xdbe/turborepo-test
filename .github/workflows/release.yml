@@ -41,6 +41,8 @@ jobs:
               }
             )
           }'
+      env:
+        GH_TOKEN: ${{ github.token }}
 
     - name: print released packages
       run: echo ${{ steps.release.outputs.paths_released }}

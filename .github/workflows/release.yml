@@ -50,14 +50,13 @@ jobs:
           FILE_BASE64=$(base64 -w 0 $FILE)
           echo "FILE: $FILE_BASE64 end"
           # FILE_ADDITIONS+="{path: \"$FILE\", contents: \"$FILE_BASE64\"},"
-          FILE_ADDITIONS+="{path: \"$FILE\", contents: "aGVsbG8="},"
+          FILE_ADDITIONS+="{path: "readme.md", contents: "aGVsbG8="},"
         done
         echo "$FILE_ADDITIONS"
-        gh api graphql -F branchName=$BRANCH -F expectedHeadOid=$GIT_OID -F files=["$FILE_ADDITIONS"] -f query='
+        gh api graphql -F branchName=$BRANCH -F expectedHeadOid=$GIT_OID -f query='
           mutation (
               $branchName: String!, 
               $expectedHeadOid: GitObjectID!
-              $files: [FileAddition!]!
             ) { 
             createCommitOnBranch(
               input: {
@@ -68,7 +67,7 @@ jobs:
                 },
                 message: {headline: "chore(test): commit message"},
                 fileChanges: {
-                  additions: $files
+                  additions: [$FILE_ADDITIONS]
                 }
                 expectedHeadOid: $expectedHeadOid
               }

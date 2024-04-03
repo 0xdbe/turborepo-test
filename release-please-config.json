@@ -8,8 +8,7 @@
       "bump-minor-pre-major": false,
       "bump-patch-for-minor-pre-major": false,
       "draft": false,
-      "prerelease": true,
-      "prerelease-type": "beta"
+      "prerelease": true
     },
     "apps/web": {
       "package-name": "@0xdbe/web",
@@ -17,8 +16,7 @@
       "bump-minor-pre-major": false,
       "bump-patch-for-minor-pre-major": false,
       "draft": false,
-      "prerelease": true,
-      "prerelease-type": "beta"
+      "prerelease": true
     },
     "packages/eslint-config": {
       "package-name": "@0xdbe/eslint-config",
@@ -26,8 +24,7 @@
       "bump-minor-pre-major": false,
       "bump-patch-for-minor-pre-major": false,
       "draft": false,
-      "prerelease": true,
-      "prerelease-type": "beta"
+      "prerelease": true
     },
     "packages/typescript-config": {
       "package-name": "@0xdbe/typescript-config",
@@ -35,8 +32,7 @@
       "bump-minor-pre-major": false,
       "bump-patch-for-minor-pre-major": false,
       "draft": false,
-      "prerelease": true,
-      "prerelease-type": "beta"
+      "prerelease": true
     },
     "packages/ui": {
       "package-name": "@0xdbe/ui",
@@ -44,8 +40,7 @@
       "bump-minor-pre-major": false,
       "bump-patch-for-minor-pre-major": false,
       "draft": false,
-      "prerelease": true,
-      "prerelease-type": "beta"
+      "prerelease": true
     }
   },
   "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json"

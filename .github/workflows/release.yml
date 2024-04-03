@@ -44,18 +44,16 @@ jobs:
       if: ${{ steps.release.outputs.prs_created == 'true' }}
       run: |
         GIT_OID=$(git rev-parse HEAD)
-        FILE_CHANGES=$(git status --porcelain | awk 'match($1, "M"){print $2}')
-        FILE_ADDITIONS=""
-        for FILE in $FILE_CHANGES; do
-          FILE_BASE64=$(base64 -w 0 $FILE)
-          echo "FILE: $FILE_BASE64 end"
-          # FILE_ADDITIONS+="{path: \"$FILE\", contents: \"$FILE_BASE64\"},"
-          FILE_ADDITIONS+="{path: "readme.md", contents: "aGVsbG8="},"
-        done
-        echo "$FILE_ADDITIONS"
+        # FILE_CHANGES=$(git status --porcelain | awk 'match($1, "M"){print $2}')
+        # FILE_ADDITIONS=""
+        # for FILE in $FILE_CHANGES; do
+        #   FILE_BASE64=$(base64 -w 0 $FILE)
+        #   FILE_ADDITIONS+="{path: \"$FILE\", contents: \"$FILE_BASE64\"},"
+        # done
 
         FILE_ADDITION=$(jq --null-input '{"path": "readme.md", "content": ("hello" | @base64) }' )
-        gh api graphql -F branchName=$BRANCH -F expectedHeadOid=$GIT_OID -F file=$FILE_ADDITION -f query='
+        echo "file: $FILE_ADDITION"
+        gh api graphql -F branchName=$BRANCH -F expectedHeadOid=$GIT_OID -F file="$FILE_ADDITION" -f query='
           mutation (
               $branchName: String!, 
               $expectedHeadOid: GitObjectID!

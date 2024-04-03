@@ -21,31 +21,56 @@ jobs:
       id: release
       with:
         include-component-in-tag: true
-    - name: debug PR data
+    - name: get git oid for the last commit
       if: ${{ steps.release.outputs.prs_created == 'true' }}
-      run: echo ${{ steps.release.outputs.pr }}
+      run: |
+        QUERY='query($repo: String!, $owner: String!, $branch: String!) {
+          repository(name: $repo, owner: $owner) {
+            ref(qualifiedName: $branch){
+              target {
+                ... on Commit {
+                  history(first: 1) {
+                    nodes {
+                      oid
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }'
+        RESULT=$(gh api graphql -F repo=$REPO -F owner=$OWNER -F branch=$BRANCH -f query="$QUERY")
+        OID=$(echo $RESULT | jq --raw-output '.data.repository.ref.target.history.nodes[].oid')
+        echo "oid=$OID" >> $GITHUB_ENV
+      env:
+        GH_TOKEN: ${{ github.token }}
+        OWNER: "0xdbe"
+        REPO: "turborepo-test"
+        BRANCH: ${{ steps.release.outputs.pr.headBranchName }}
+
     - name: commit new file
       if: ${{ steps.release.outputs.prs_created == 'true' }}
       run: |
-        gh api graphql -F query='
+        gh api graphql -F branchName=$BRANCH_NAME -f query='
           mutation { 
             createCommitOnBranch(
               input: {
                 branch:
                 {
                   repositoryNameWithOwner: "0xdbe/turborepo-test",
-                  branchName: ${{ steps.release.outputs.pr.headBranchName }}
+                  branchName: $branchName
                 },
                 message: {headline: "chore(test): commit message"},
                 fileChanges: {
                   additions: {path: "hello.md", contents: "aGVsbG8="}
                 }
-                expectedHeadOid: ${{ steps.release.outputs.pr.sha }}
+                expectedHeadOid: ${{ env.oid }}
               }
             )
           }'
       env:
         GH_TOKEN: ${{ github.token }}
+        BRANCH_NAME: ${{ steps.release.outputs.pr.headBranchName }}
 
     - name: print released packages
       run: echo ${{ steps.release.outputs.paths_released }}

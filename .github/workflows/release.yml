@@ -54,7 +54,7 @@ jobs:
           mutation (
               $branchName: String!, 
               $expectedHeadOid: GitObjectID!
-              $files: [AdditionInput!]!
+              $files: [FileAddition!]!
             ) { 
             createCommitOnBranch(
               input: {

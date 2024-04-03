@@ -21,6 +21,10 @@ jobs:
       id: release
       with:
         include-component-in-tag: true
+    - name: print pr
+      run: echo ${{ steps.release.outputs.pr }}
+    - name: print prs
+      run: echo ${{ steps.release.outputs.prs }}
     - name: get git oid for the last commit
       if: ${{ steps.release.outputs.prs_created == 'true' }}
       run: |

@@ -21,6 +21,9 @@ jobs:
       id: release
       with:
         include-component-in-tag: true
+    - name: debug PR data
+      if: ${{ steps.release.outputs.prs_created == 'true' }}
+      run: echo ${{ steps.release.outputs.pr }}
     - name: commit new file
       if: ${{ steps.release.outputs.prs_created == 'true' }}
       run: |

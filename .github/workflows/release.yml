@@ -44,7 +44,7 @@ jobs:
       if: ${{ steps.release.outputs.prs_created == 'true' }}
       run: |
         GIT_OID=$(git rev-parse HEAD)
-        FILE_CHANGES=$(git status --porcelain | awk 'match($1, "M"){pinrt $2}')
+        FILE_CHANGES=$(git status --porcelain | awk 'match($1, "M"){print $2}')
         FILE_ADDITIONS=""
         for FILE in $FILE_CHANGES; do
           FILE_BASE64=$(base64 -w 0 $FILE)

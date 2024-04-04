@@ -53,24 +53,31 @@ jobs:
 
         FILE_ADDITION=$(jq --null-input '{"path": "readme.md", "contents": ("hello" | @base64) }' )
         echo "file: $FILE_ADDITION"
-        gh api graphql -F branchName=$BRANCH -F expectedHeadOid=$GIT_OID -F file[path]="readme.md" -F file[contents]="aGVsbG8=" -f query='
+        gh api graphql \
+          -F owner="0xdbe" \
+          -F repo="turborepo-test" \
+          -F branchName=$BRANCH \
+          -F expectedHeadOid=$GIT_OID \
+          -F files[][path]="readme.md" -F files[][contents]="aGVsbG8=" \
+          -F files[][path]="noreadme.md" -F files[][contents]="aGVsbG8=" \
+          -f query='
           mutation (
+              $owner: String!,
+              $repo: String!,
               $branchName: String!, 
               $expectedHeadOid: GitObjectID!
-              $file: FileAddition!
+              $files: [FileAddition!]!
             ) { 
             createCommitOnBranch(
               input: {
                 branch:
                 {
-                  repositoryNameWithOwner: "0xdbe/turborepo-test",
+                  repositoryNameWithOwner: "$owner/$repo",
                   branchName: $branchName
                 },
                 message: {headline: "chore(test): commit message"},
                 fileChanges: {
-                  additions: [
-                    $file
-                  ]
+                  additions: $files
                 }
                 expectedHeadOid: $expectedHeadOid
               }

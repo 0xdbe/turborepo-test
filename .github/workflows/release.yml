@@ -44,47 +44,13 @@ jobs:
       if: ${{ steps.release.outputs.prs_created == 'true' }}
       run: |
         GIT_OID=$(git rev-parse HEAD)
-        # FILE_CHANGES=$(git status --porcelain | awk 'match($1, "M"){print $2}')
-        # FILE_ADDITIONS=""
-        # for FILE in $FILE_CHANGES; do
-        #   FILE_BASE64=$(base64 -w 0 $FILE)
-        #   FILE_ADDITIONS+="{path: \"$FILE\", contents: \"$FILE_BASE64\"},"
-        # done
-
-        FILE_ADDITION=$(jq --null-input '{"path": "readme.md", "contents": ("hello" | @base64) }' )
-        echo "file: $FILE_ADDITION"
         gh api graphql \
           -F githubReporisoty=$GITHUB_REPOSITORY \
           -F branchName=$BRANCH \
           -F expectedHeadOid=$GIT_OID \
+          -F commitMessage="chore: release extra file" \
           -F files[][path]="readme.md" -F files[][contents]="aGVsbG8=" \
-          -F files[][path]="noreadme.md" -F files[][contents]="aGVsbG8=" \
-          -f query='
-          mutation (
-              $githubReporisoty: String!,
-              $branchName: String!, 
-              $expectedHeadOid: GitObjectID!
-              $files: [FileAddition!]!
-            ) { 
-            createCommitOnBranch(
-              input: {
-                branch:
-                {
-                  repositoryNameWithOwner: $githubReporisoty,
-                  branchName: $branchName
-                },
-                message: {headline: "chore(test): commit message"},
-                fileChanges: {
-                  additions: $files
-                }
-                expectedHeadOid: $expectedHeadOid
-              }
-            ){
-              commit {
-                url
-              }
-            }
-          }'
+          -f query=@.github/api/createCommitOnBranch.gql
       env:
         GH_TOKEN: ${{ github.token }}
         BRANCH: ${{ steps.get_branch_name.outputs.branchName }}

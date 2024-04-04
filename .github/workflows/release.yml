@@ -45,11 +45,12 @@ jobs:
       run: |
         GIT_OID=$(git rev-parse HEAD)
         gh api graphql \
-          -F githubReporisoty=$GITHUB_REPOSITORY \
+          -F githubRepository=$GITHUB_REPOSITORY \
           -F branchName=$BRANCH \
-          -F expectedHeadOid=$GIT_OID \
+          -F expectedHeadOid=$(git rev-parse HEAD) \
           -F commitMessage="chore: release extra file" \
-          -F files[][path]="readme.md" -F files[][contents]="aGVsbG8=" \
+          -F files[][path]="README.md" -F files[][contents]=$(base64 -w0 README.md) \
+          -F files[][path]="NOREADME.md" -F files[][contents]="aGVsbG8=" \
           -F 'query=@.github/api/createCommitOnBranch.gql'
       env:
         GH_TOKEN: ${{ github.token }}

@@ -1,5 +1,5 @@
 mutation (
-    $githubReporisoty: String!,
+    $githubRepository: String!,
     $branchName: String!, 
     $expectedHeadOid: GitObjectID!
     $commitMessage: String!
@@ -9,7 +9,7 @@ createCommitOnBranch(
     input: {
     branch:
     {
-        repositoryNameWithOwner: $githubReporisoty,
+        repositoryNameWithOwner: $githubRepository,
         branchName: $branchName
     },
     message: {headline: $commitMessage},

@@ -54,16 +54,14 @@ jobs:
         FILE_ADDITION=$(jq --null-input '{"path": "readme.md", "contents": ("hello" | @base64) }' )
         echo "file: $FILE_ADDITION"
         gh api graphql \
-          -F owner="0xdbe" \
-          -F repo="turborepo-test" \
+          -F githubReporisoty=$GITHUB_REPOSITORY \
           -F branchName=$BRANCH \
           -F expectedHeadOid=$GIT_OID \
           -F files[][path]="readme.md" -F files[][contents]="aGVsbG8=" \
           -F files[][path]="noreadme.md" -F files[][contents]="aGVsbG8=" \
           -f query='
           mutation (
-              $owner: String!,
-              $repo: String!,
+              $githubReporisoty: String!,
               $branchName: String!, 
               $expectedHeadOid: GitObjectID!
               $files: [FileAddition!]!
@@ -72,7 +70,7 @@ jobs:
               input: {
                 branch:
                 {
-                  repositoryNameWithOwner: "$owner/$repo",
+                  repositoryNameWithOwner: $githubReporisoty,
                   branchName: $branchName
                 },
                 message: {headline: "chore(test): commit message"},

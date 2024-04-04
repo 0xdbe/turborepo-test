@@ -50,7 +50,7 @@ jobs:
           -F expectedHeadOid=$GIT_OID \
           -F commitMessage="chore: release extra file" \
           -F files[][path]="readme.md" -F files[][contents]="aGVsbG8=" \
-          -f query=@.github/api/createCommitOnBranch.gql
+          -F 'query=@.github/api/createCommitOnBranch.gql'
       env:
         GH_TOKEN: ${{ github.token }}
         BRANCH: ${{ steps.get_branch_name.outputs.branchName }}

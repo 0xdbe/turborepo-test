@@ -72,6 +72,13 @@
   * dependencies
     * @0xdbe/ui bumped from 1.1.13 to 1.1.14
 
+## [1.2.12](https://github.com/0xdbe/turborepo-test/compare/web-v1.2.11...web-v1.2.12) (2024-04-09)
+
+
+### Bug Fixes
+
+* change greetings message ([b4fbc1b](https://github.com/0xdbe/turborepo-test/commit/b4fbc1b32ed7a27d87829209bf7cd15a770e3cc3))
+
 ## [1.2.9](https://github.com/0xdbe/turborepo-test/compare/web-v1.2.8...web-v1.2.9) (2024-02-20)
 
 

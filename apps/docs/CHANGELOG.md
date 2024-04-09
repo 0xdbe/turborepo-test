@@ -78,6 +78,13 @@
   * dependencies
     * @0xdbe/ui bumped from 1.1.13 to 1.1.14
 
+## [1.1.16](https://github.com/0xdbe/turborepo-test/compare/docs-v1.1.15...docs-v1.1.16) (2024-04-09)
+
+
+### Bug Fixes
+
+* release workflow ([#18](https://github.com/0xdbe/turborepo-test/issues/18)) ([635cf89](https://github.com/0xdbe/turborepo-test/commit/635cf89c163fd6cd8c451bfeded0799139b4e64e))
+
 ## [1.1.15](https://github.com/0xdbe/turborepo-test/compare/docs-v1.1.14...docs-v1.1.15) (2024-04-09)
 
 

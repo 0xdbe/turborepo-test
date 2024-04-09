@@ -1,5 +1,5 @@
 {
-  "apps/docs": "1.1.15",
+  "apps/docs": "1.1.16",
   "apps/web": "1.2.12",
   "packages/eslint-config": "1.1.0",
   "packages/typescript-config": "1.1.0",

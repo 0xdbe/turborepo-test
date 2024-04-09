@@ -56,6 +56,7 @@ export default function Page(): JSX.Element {
     <main className={styles.main}>
       <div className={styles.description}>
         <p>
+          hello
           examples/basic&nbsp;
           <Code className={styles.code}>docs</Code>
         </p>

@@ -21,6 +21,7 @@ jobs:
       id: release
       with:
         include-component-in-tag: true
+        prerelease: true
 
     - name: get release branch name
       id: get_branch_name
@@ -38,7 +39,9 @@ jobs:
     - name: edit file
       if: ${{ steps.release.outputs.prs_created == 'true' }}
       run: |
-        echo "hello" >> README.md
+        echo $version >> packages/version.md
+      env:
+        version: ${{ steps.release.outputs['apps/docs--major'] }}.${{ steps.release.outputs['apps/docs--minor'] }}.${{ steps.release.outputs['apps/docs--patch'] }}
 
     - name: commit new file
       if: ${{ steps.release.outputs.prs_created == 'true' }}
@@ -49,8 +52,7 @@ jobs:
           -F branchName=$BRANCH \
           -F expectedHeadOid=$(git rev-parse HEAD) \
           -F commitMessage="chore: release extra file" \
-          -F files[][path]="README.md" -F files[][contents]=$(base64 -w0 README.md) \
-          -F files[][path]="NOREADME.md" -F files[][contents]="aGVsbG8=" \
+          -F files[][path]="packages/version.md" -F files[][contents]=$(base64 -w0 packages/version.md) \
           -F 'query=@.github/api/createCommitOnBranch.gql'
       env:
         GH_TOKEN: ${{ github.token }}
